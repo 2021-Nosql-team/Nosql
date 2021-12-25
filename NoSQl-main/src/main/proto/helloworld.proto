@@ -1,0 +1,99 @@
+// Copyright 2015 The gRPC Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+package helloworld;
+
+// The greeting service definition.
+service Greeter {
+  rpc GetMovieProfile(MovieProfileRequest)returns(MovieProfileResponse){}
+  rpc GetUserProfile(UserProfileRequest) returns(UserProfileResponse){}
+  rpc GetRecommendMovies(RecommendRequest) returns(RecommendResponse){}
+}
+// 电影画像
+message MovieProfileRequest{
+  string session_id = 1;
+  uint64 movie_id = 2;
+}
+message MovieProfileResponse{
+  string session_id = 1;
+  uint64 movie_id = 2;
+  repeated MovieTag tags = 3;
+  string title = 4;
+  double rating = 5;
+  string genres = 6;
+  string prefer_year = 7;
+  repeated MovieTag sortedTags = 8;
+}
+// 用户画像
+message UserProfileRequest{
+  string session_id = 1;
+  uint64 user_id = 2;
+}
+message UserProfileResponse{
+  string session_id = 1;
+  uint64 user_id = 2;
+  repeated UserRatingList ratingList = 3;
+  repeated MovieTag tags = 4;
+  double average_rating = 5;
+  string prefer_year = 6;
+  repeated MovieTag sortedTags = 7;
+}
+// 电影的标签
+message MovieTag{
+  uint64 tag_id = 1;
+  double relevance = 2;
+}
+// 用户的行为历史
+message UserRatingList{
+  uint64 movie_id = 1;
+  double rating = 2;
+  uint64 timestamp = 3;
+}
+
+message MovieProfile2Sim{
+  MovieProfileResponse movie_profile = 1;
+  double relevance = 2;
+}
+message similarMovies{
+  uint64 movie_id = 1;
+  repeated MovieRelevance movieRelevance= 2;
+}
+message MovieRelevance{
+  uint64 movie_id = 1;
+  double relevance = 2;
+}
+
+// 召回结果
+message RecallResult{
+  string userId = 1;
+  repeated string movieId = 2;
+}
+
+// 推荐结果
+message RecommendRequest{
+  string session_id = 1;
+  string userId = 2;
+}
+
+message RecommendResponse{
+  string session_id = 1;
+  string userId = 2;
+  repeated string movieId = 3;
+}
