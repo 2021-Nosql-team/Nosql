@@ -25,6 +25,7 @@ public class tagsToTags {
         createCsv();
     }
 
+    // 获取所有的电影画像
     public static ArrayList<MovieProfileResponse> getAllMovies() throws SQLException, InvalidProtocolBufferException {
         ArrayList<MovieProfileResponse> movieList = new ArrayList<>();
         MovieProfileResponse response;
@@ -41,6 +42,7 @@ public class tagsToTags {
         return movieList;
     }
 
+    // 获取用户相关度最高的五个标签
     public static MovieTag[] user_tags(List<MovieTag> userProfile) {
         MovieTag[] tags = new MovieTag[5];
 
@@ -58,9 +60,11 @@ public class tagsToTags {
         return tags;
     }
 
+    // 通过用户相关度最高的五个标签筛选电影
     public static ArrayList<Movie> user_movies(MovieTag[] tags, ArrayList<MovieProfileResponse> movies) {
         ArrayList<Movie> rec_movies = new ArrayList<>();
 
+        // 将用户相关度最高的标签与电影的相关度*1.5 + 第二第三的标签*1.25 + 第四第五的标签*1 + 电影平均分/2，选出得分最高的五个电影
         for (MovieProfileResponse movie : movies) {
             double value = 0;
             for (int j = 0; j < tags.length; j++) {
@@ -89,6 +93,7 @@ public class tagsToTags {
         return rec_movies;
     }
 
+    //重写比较方法将标签按照相关度排序
     private static final Comparator<MovieTag> a = (Comparator<MovieTag>) (t, t1) -> {
         return Double.compare(t.getRelevance(), t1.getRelevance()) * -1;
     };
@@ -112,10 +117,10 @@ public class tagsToTags {
             writer.writeRecord(header);
 
             Iterator<byte[]> it = allUsers.iterator();
-            while(it.hasNext()){
-                content = getContent(it.next(),allMovies);
+            while (it.hasNext()) {
+                content = getContent(it.next(), allMovies);
                 // 存在有用户没有tag,所以无召回结果
-                if(content == null)
+                if (content == null)
                     continue;
                 writer.writeRecord(content);
                 count++;
@@ -138,12 +143,12 @@ public class tagsToTags {
         UserProfileResponse userProfileResponse = UserProfileResponse.parseFrom(bytes);
         List<MovieTag> relevantMovies = userProfileResponse.getTagsList();
 
-        if(relevantMovies.isEmpty())
+        if (relevantMovies.isEmpty())
             return null;
 
         ArrayList<Movie> movies_cf = user_movies(user_tags(relevantMovies), allMovies);
         for (int i = 0; i < 5; i++) {
-            content[i+1] = String.valueOf(movies_cf.get(i).moiveId);
+            content[i + 1] = String.valueOf(movies_cf.get(i).moiveId);
         }
 
         return content;
