@@ -8,8 +8,8 @@
 ### 召回
 召回部分我们使用了四种方式召回
 1. icf
-2. ucf
-3. 矩阵分解
+2. ucf（ucf.java文件）
+3. 矩阵分解（Matrix-factorization文件夹）
 4. 基于tag的召回（在service文件夹里，tagsToTags文件）
 
 ### 打分排序模型
