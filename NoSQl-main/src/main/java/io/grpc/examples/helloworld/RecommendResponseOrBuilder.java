@@ -45,4 +45,23 @@ public interface RecommendResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMovieIdBytes(int index);
+
+  /**
+   * <code>repeated string possibility = 4;</code>
+   */
+  java.util.List<String>
+      getPossibilityList();
+  /**
+   * <code>repeated string possibility = 4;</code>
+   */
+  int getPossibilityCount();
+  /**
+   * <code>repeated string possibility = 4;</code>
+   */
+  String getPossibility(int index);
+  /**
+   * <code>repeated string possibility = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getPossibilityBytes(int index);
 }

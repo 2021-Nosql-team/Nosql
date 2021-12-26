@@ -80,11 +80,12 @@ public class HelloWorldClient {
         }
 
         List<String> movies = response.getMovieIdList();
-        logger.info("--- The recommend movies for user " + userId + " ---");
-        for (int i = 0; i < 5; i++) {
-            logger.info("Movie_" + i+1 + " : " + movies.get(i));
+        List<String> possibility = response.getPossibilityList();
+        System.out.println("--- The recommend movies for user " + userId + " ---");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Movie_" + i + " : " + movies.get(i - 1) + "   Possibility : " + possibility.get(i - 1));
         }
-        logger.info("----------------------");
+        System.out.println("---------------------------------------");
     }
 
     /**

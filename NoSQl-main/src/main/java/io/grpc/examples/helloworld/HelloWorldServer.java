@@ -23,7 +23,7 @@ import io.grpc.examples.service.RecallToModel;
 import io.grpc.stub.StreamObserver;
 import redis.clients.jedis.Jedis;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -100,9 +100,9 @@ public class HelloWorldServer {
 
             byte[] bytes = jedis.hget("MovieProfiles".getBytes(), String.valueOf(request.getMovieId()).getBytes());
             try {
-                 movieProfileResponse = MovieProfileResponse.parseFrom(bytes);
-                 responseObserver.onNext(movieProfileResponse);
-                 responseObserver.onCompleted();
+                movieProfileResponse = MovieProfileResponse.parseFrom(bytes);
+                responseObserver.onNext(movieProfileResponse);
+                responseObserver.onCompleted();
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }
@@ -110,14 +110,53 @@ public class HelloWorldServer {
 
         @Override
         public void getRecommendMovies(RecommendRequest request,
-                                       StreamObserver<RecommendResponse> responseObserver){
+                                       StreamObserver<RecommendResponse> responseObserver) {
             RecommendResponse response;
 
             try {
                 RecallToModel.create_prediction_csv(request.getUserId());
-                response = RecommendResponse.newBuilder().setUserId(request.getUserId()).build();
-                responseObserver.onNext(response);
-                responseObserver.onCompleted();
+
+                logger.info("Server has received the request");
+
+                Process process;
+                try {
+                    process = Runtime.getRuntime().exec("cmd /c  D:\\programming\\Nosql\\1NoSql\\NoSQl-main\\help.bat");// 执行py文件
+                    //用输入输出流来截取结果
+                    BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                    String line = null;
+                    String prediction = null;
+                    while ((line = in.readLine()) != null) {
+                        if (line.startsWith("[")) {
+                            prediction = line.substring(1,line.length()-1);
+                        }
+                    }
+                    List<String> movieId=new ArrayList<String>();
+                    List<String> possibility=new ArrayList<String>();
+
+                    StringTokenizer st=new StringTokenizer(prediction,", ");
+                    int switchNum=1;
+                    while(st.hasMoreTokens()){
+                        String temp = st.nextToken();
+                        if(switchNum==1){
+                            movieId.add(temp.substring(1));
+                            switchNum = 2;
+                        }else{
+                            possibility.add(temp.substring(1,temp.length()-2));
+                            switchNum = 1;
+                        }
+                    }
+
+                    response = RecommendResponse.newBuilder().setUserId(request.getUserId())
+                            .addAllMovieId(movieId).addAllPossibility(possibility).build();
+                    responseObserver.onNext(response);
+                    responseObserver.onCompleted();
+
+                    logger.info("Server has sent a response");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }

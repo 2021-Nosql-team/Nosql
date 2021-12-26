@@ -96,4 +96,5 @@ message RecommendResponse{
   string session_id = 1;
   string userId = 2;
   repeated string movieId = 3;
+  repeated string possibility = 4;
 }

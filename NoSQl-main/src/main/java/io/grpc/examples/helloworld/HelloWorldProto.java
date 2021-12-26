@@ -109,17 +109,18 @@ public final class HelloWorldProto {
       "id\030\001 \001(\004\022\021\n\trelevance\030\002 \001(\001\"/\n\014RecallRes" +
       "ult\022\016\n\006userId\030\001 \001(\t\022\017\n\007movieId\030\002 \003(\t\"6\n\020" +
       "RecommendRequest\022\022\n\nsession_id\030\001 \001(\t\022\016\n\006" +
-      "userId\030\002 \001(\t\"H\n\021RecommendResponse\022\022\n\nses" +
+      "userId\030\002 \001(\t\"]\n\021RecommendResponse\022\022\n\nses" +
       "sion_id\030\001 \001(\t\022\016\n\006userId\030\002 \001(\t\022\017\n\007movieId" +
-      "\030\003 \003(\t2\213\002\n\007Greeter\022V\n\017GetMovieProfile\022\037." +
-      "helloworld.MovieProfileRequest\032 .hellowo",
-      "rld.MovieProfileResponse\"\000\022S\n\016GetUserPro" +
-      "file\022\036.helloworld.UserProfileRequest\032\037.h" +
-      "elloworld.UserProfileResponse\"\000\022S\n\022GetRe" +
-      "commendMovies\022\034.helloworld.RecommendRequ" +
-      "est\032\035.helloworld.RecommendResponse\"\000B6\n\033" +
-      "io.grpc.examples.helloworldB\017HelloWorldP" +
-      "rotoP\001\242\002\003HLWb\006proto3"
+      "\030\003 \003(\t\022\023\n\013possibility\030\004 \003(\t2\213\002\n\007Greeter\022" +
+      "V\n\017GetMovieProfile\022\037.helloworld.MoviePro",
+      "fileRequest\032 .helloworld.MovieProfileRes" +
+      "ponse\"\000\022S\n\016GetUserProfile\022\036.helloworld.U" +
+      "serProfileRequest\032\037.helloworld.UserProfi" +
+      "leResponse\"\000\022S\n\022GetRecommendMovies\022\034.hel" +
+      "loworld.RecommendRequest\032\035.helloworld.Re" +
+      "commendResponse\"\000B6\n\033io.grpc.examples.he" +
+      "lloworldB\017HelloWorldProtoP\001\242\002\003HLWb\006proto" +
+      "3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -204,7 +205,7 @@ public final class HelloWorldProto {
     internal_static_helloworld_RecommendResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_helloworld_RecommendResponse_descriptor,
-        new String[] { "SessionId", "UserId", "MovieId", });
+        new String[] { "SessionId", "UserId", "MovieId", "Possibility", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

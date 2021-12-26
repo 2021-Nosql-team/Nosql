@@ -26,6 +26,7 @@ service Greeter {
   rpc GetUserProfile(UserProfileRequest) returns(UserProfileResponse){}
   rpc GetRecommendMovies(RecommendRequest) returns(RecommendResponse){}
 }
+// 电影画像
 message MovieProfileRequest{
   string session_id = 1;
   uint64 movie_id = 2;
@@ -40,6 +41,7 @@ message MovieProfileResponse{
   string prefer_year = 7;
   repeated MovieTag sortedTags = 8;
 }
+// 用户画像
 message UserProfileRequest{
   string session_id = 1;
   uint64 user_id = 2;
@@ -53,11 +55,12 @@ message UserProfileResponse{
   string prefer_year = 6;
   repeated MovieTag sortedTags = 7;
 }
-
+// 电影的标签
 message MovieTag{
   uint64 tag_id = 1;
   double relevance = 2;
 }
+// 用户的行为历史
 message UserRatingList{
   uint64 movie_id = 1;
   double rating = 2;
@@ -77,11 +80,13 @@ message MovieRelevance{
   double relevance = 2;
 }
 
+// 召回结果
 message RecallResult{
   string userId = 1;
   repeated string movieId = 2;
 }
 
+// 推荐结果
 message RecommendRequest{
   string session_id = 1;
   string userId = 2;
@@ -91,4 +96,5 @@ message RecommendResponse{
   string session_id = 1;
   string userId = 2;
   repeated string movieId = 3;
+  repeated string possibility = 4;
 }

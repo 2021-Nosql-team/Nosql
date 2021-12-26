@@ -18,6 +18,7 @@ public  final class RecommendResponse extends
     sessionId_ = "";
     userId_ = "";
     movieId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    possibility_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
 
   @Override
@@ -66,6 +67,15 @@ public  final class RecommendResponse extends
             movieId_.add(s);
             break;
           }
+          case 34: {
+            String s = input.readStringRequireUtf8();
+            if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              possibility_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000008;
+            }
+            possibility_.add(s);
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -76,6 +86,9 @@ public  final class RecommendResponse extends
     } finally {
       if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
         movieId_ = movieId_.getUnmodifiableView();
+      }
+      if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        possibility_ = possibility_.getUnmodifiableView();
       }
       makeExtensionsImmutable();
     }
@@ -190,6 +203,35 @@ public  final class RecommendResponse extends
     return movieId_.getByteString(index);
   }
 
+  public static final int POSSIBILITY_FIELD_NUMBER = 4;
+  private com.google.protobuf.LazyStringList possibility_;
+  /**
+   * <code>repeated string possibility = 4;</code>
+   */
+  public com.google.protobuf.ProtocolStringList
+      getPossibilityList() {
+    return possibility_;
+  }
+  /**
+   * <code>repeated string possibility = 4;</code>
+   */
+  public int getPossibilityCount() {
+    return possibility_.size();
+  }
+  /**
+   * <code>repeated string possibility = 4;</code>
+   */
+  public String getPossibility(int index) {
+    return possibility_.get(index);
+  }
+  /**
+   * <code>repeated string possibility = 4;</code>
+   */
+  public com.google.protobuf.ByteString
+      getPossibilityBytes(int index) {
+    return possibility_.getByteString(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -211,6 +253,9 @@ public  final class RecommendResponse extends
     for (int i = 0; i < movieId_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, movieId_.getRaw(i));
     }
+    for (int i = 0; i < possibility_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, possibility_.getRaw(i));
+    }
   }
 
   public int getSerializedSize() {
@@ -231,6 +276,14 @@ public  final class RecommendResponse extends
       }
       size += dataSize;
       size += 1 * getMovieIdList().size();
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < possibility_.size(); i++) {
+        dataSize += computeStringSizeNoTag(possibility_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getPossibilityList().size();
     }
     memoizedSize = size;
     return size;
@@ -254,6 +307,8 @@ public  final class RecommendResponse extends
         .equals(other.getUserId());
     result = result && getMovieIdList()
         .equals(other.getMovieIdList());
+    result = result && getPossibilityList()
+        .equals(other.getPossibilityList());
     return result;
   }
 
@@ -271,6 +326,10 @@ public  final class RecommendResponse extends
     if (getMovieIdCount() > 0) {
       hash = (37 * hash) + MOVIEID_FIELD_NUMBER;
       hash = (53 * hash) + getMovieIdList().hashCode();
+    }
+    if (getPossibilityCount() > 0) {
+      hash = (37 * hash) + POSSIBILITY_FIELD_NUMBER;
+      hash = (53 * hash) + getPossibilityList().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -396,6 +455,8 @@ public  final class RecommendResponse extends
 
       movieId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       bitField0_ = (bitField0_ & ~0x00000004);
+      possibility_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000008);
       return this;
     }
 
@@ -427,6 +488,11 @@ public  final class RecommendResponse extends
         bitField0_ = (bitField0_ & ~0x00000004);
       }
       result.movieId_ = movieId_;
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        possibility_ = possibility_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000008);
+      }
+      result.possibility_ = possibility_;
       result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
@@ -484,6 +550,16 @@ public  final class RecommendResponse extends
         } else {
           ensureMovieIdIsMutable();
           movieId_.addAll(other.movieId_);
+        }
+        onChanged();
+      }
+      if (!other.possibility_.isEmpty()) {
+        if (possibility_.isEmpty()) {
+          possibility_ = other.possibility_;
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          ensurePossibilityIsMutable();
+          possibility_.addAll(other.possibility_);
         }
         onChanged();
       }
@@ -742,6 +818,100 @@ public  final class RecommendResponse extends
   checkByteStringIsUtf8(value);
       ensureMovieIdIsMutable();
       movieId_.add(value);
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringList possibility_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensurePossibilityIsMutable() {
+      if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        possibility_ = new com.google.protobuf.LazyStringArrayList(possibility_);
+        bitField0_ |= 0x00000008;
+       }
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getPossibilityList() {
+      return possibility_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public int getPossibilityCount() {
+      return possibility_.size();
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public String getPossibility(int index) {
+      return possibility_.get(index);
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPossibilityBytes(int index) {
+      return possibility_.getByteString(index);
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public Builder setPossibility(
+        int index, String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensurePossibilityIsMutable();
+      possibility_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public Builder addPossibility(
+        String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensurePossibilityIsMutable();
+      possibility_.add(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public Builder addAllPossibility(
+        Iterable<String> values) {
+      ensurePossibilityIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, possibility_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public Builder clearPossibility() {
+      possibility_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000008);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string possibility = 4;</code>
+     */
+    public Builder addPossibilityBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      ensurePossibilityIsMutable();
+      possibility_.add(value);
       onChanged();
       return this;
     }
