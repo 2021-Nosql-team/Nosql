@@ -1,4 +1,6 @@
 # Nosql
+### 小组成员
+毛恒明 李昊阳 刘志成 任洲弘 石涵舟 熊师意
 ### 用户画像电影画像的构建
 1. 储存用户画像电影画像部分的代码在service文件夹里，其中电影画像的代码是MovieProfileMaker，用户画像是getData和savemessage文件。用户画像和电影画像均储存在redis里。
 2. 我们还从imdb网站上爬取了更多有关电影的信息，存储在mongodb里。
