@@ -14,3 +14,6 @@
 
 ### 打分排序模型
 代码见model文件夹
+
+### 推荐系统
+系统的服务器和客户端代码分别是helloworld文件夹中的helloworldClient和helloworldServer文件。
